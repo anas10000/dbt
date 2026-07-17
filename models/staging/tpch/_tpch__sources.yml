@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: tpch
+    database: snowflake_sample_data
+    schema: tpch_sf1
+    tables:
+      - name: customer
+        description: "Table clients brute du jeu de données TPCH"
+        columns:
+          - name: c_custkey
+            description: "Clé primaire client"
+          - name: c_name
+            description: "Nom du client"
+
+      - name: orders
+        description: "Table commandes brute du jeu de données TPCH"
+        columns:
+          - name: o_orderkey
+            description: "Clé primaire commande"
+          - name: o_custkey
+            description: "Clé étrangère vers le client"

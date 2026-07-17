@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "Dimension client enrichie des statistiques de commandes et d'une segmentation métier"
+    columns:
+      - name: customer_id
+        description: "Identifiant unique du client"
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_segment
+        description: "Segmentation métier basée sur le nombre de commandes"
+        tests:
+          - accepted_values:
+              values: ['Jamais commandé', 'Client occasionnel', 'Client régulier']
