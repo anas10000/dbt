@@ -1,0 +1,25 @@
+name: Deploy to DEV
+
+on:
+  push:
+    branches: [dev]
+
+jobs:
+  dbt-deploy-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install dbt-snowflake
+
+      - run: dbt deps
+        working-directory: mon_projet
+
+      - run: dbt build --target dev
+        working-directory: mon_projet
+        env:
+          DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
