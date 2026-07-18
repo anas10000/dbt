@@ -15,7 +15,6 @@ jobs:
           python-version: '3.12'
 
       - run: pip install dbt-snowflake
-
       - run: dbt deps
 
       - run: dbt build --target dev
