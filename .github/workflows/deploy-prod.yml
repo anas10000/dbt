@@ -1,0 +1,26 @@
+name: Deploy to PROD
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  dbt-deploy-prod:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install dbt-snowflake
+
+      - run: dbt deps
+        working-directory: mon_projet
+
+      - run: dbt build --target prod
+        working-directory: mon_projet
+        env:
+          DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
