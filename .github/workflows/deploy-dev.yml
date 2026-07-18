@@ -18,20 +18,17 @@ jobs:
       - name: Create profiles.yml
         run: |
           mkdir -p ~/.dbt
-          cat << EOF > ~/.dbt/profiles.yml
-          mon_projet:
-            target: dev
-            outputs:
-              dev:
-                type: snowflake
-                account: ${{ secrets.DBT_ACCOUNT }}
-                user: ${{ secrets.DBT_USER }}
-                password: "${{ secrets.DBT_PASSWORD }}"
-                role: ACCOUNTADMIN
-                database: DWH_DEV
-                warehouse: DWH_DEV
-                schema: PUBLIC
-                threads: 1
-          EOF
-
+          echo "mon_projet:" > ~/.dbt/profiles.yml
+          echo "  target: dev" >> ~/.dbt/profiles.yml
+          echo "  outputs:" >> ~/.dbt/profiles.yml
+          echo "    dev:" >> ~/.dbt/profiles.yml
+          echo "      type: snowflake" >> ~/.dbt/profiles.yml
+          echo "      account: ${{ secrets.DBT_ACCOUNT }}" >> ~/.dbt/profiles.yml
+          echo "      user: ${{ secrets.DBT_USER }}" >> ~/.dbt/profiles.yml
+          echo "      password: \"${{ secrets.DBT_PASSWORD }}\"" >> ~/.dbt/profiles.yml
+          echo "      role: ACCOUNTADMIN" >> ~/.dbt/profiles.yml
+          echo "      database: DWH_DEV" >> ~/.dbt/profiles.yml
+          echo "      warehouse: DWH_DEV" >> ~/.dbt/profiles.yml
+          echo "      schema: PUBLIC" >> ~/.dbt/profiles.yml
+          echo "      threads: 1" >> ~/.dbt/profiles.yml
       - run: dbt build --target dev
