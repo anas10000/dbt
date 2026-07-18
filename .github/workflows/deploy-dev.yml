@@ -9,14 +9,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
       - run: pip install dbt-snowflake
       - run: dbt deps
 
+      - name: Create profiles.yml
+        run: |
+          mkdir -p ~/.dbt
+          cat << EOF > ~/.dbt/profiles.yml
+          mon_projet:
+            target: dev
+            outputs:
+              dev:
+                type: snowflake
+                account: ${{ secrets.DBT_ACCOUNT }}
+                user: ${{ secrets.DBT_USER }}
+                password: "${{ secrets.DBT_PASSWORD }}"
+                role: ACCOUNTADMIN
+                database: DWH_DEV
+                warehouse: DWH_DEV
+                schema: PUBLIC
+                threads: 1
+          EOF
+
       - run: dbt build --target dev
-        env:
-          DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
