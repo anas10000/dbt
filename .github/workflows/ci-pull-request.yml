@@ -19,7 +19,6 @@ jobs:
 
       - name: Install dbt packages
         run: dbt deps
-        working-directory: mon_projet
 
       - name: Determine target environment
         id: target
@@ -31,6 +30,5 @@ jobs:
 
       - name: dbt build (validation only)
         run: dbt build --target ${{ steps.target.outputs.target }}
-        working-directory: mon_projet
         env:
           DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}

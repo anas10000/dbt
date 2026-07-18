@@ -18,9 +18,7 @@ jobs:
       - run: pip install dbt-snowflake
 
       - run: dbt deps
-        working-directory: mon_projet
 
       - run: dbt build --target prod
-        working-directory: mon_projet
         env:
           DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
