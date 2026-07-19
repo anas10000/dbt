@@ -9,22 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-<<<<<<< HEAD
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - run: pip install dbt-snowflake
-
-      - run: dbt deps
-        working-directory: mon_projet
-
-      - run: dbt build --target uat
-        working-directory: mon_projet
-        env:
-          DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-=======
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -47,4 +31,3 @@ jobs:
           echo "      schema: PUBLIC" >> ~/.dbt/profiles.yml
           echo "      threads: 1" >> ~/.dbt/profiles.yml
       - run: dbt build --target uat
->>>>>>> uat

@@ -9,21 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
       - name: Install dbt
         run: pip install dbt-snowflake
-
       - name: Install dbt packages
         run: dbt deps
-<<<<<<< HEAD
-        working-directory: mon_projet
-=======
->>>>>>> uat
-
       - name: Determine target environment
         id: target
         run: |
@@ -31,12 +23,7 @@ jobs:
           elif [ "${{ github.base_ref }}" = "uat" ]; then echo "target=uat" >> $GITHUB_OUTPUT
           else echo "target=prod" >> $GITHUB_OUTPUT
           fi
-
       - name: dbt build (validation only)
         run: dbt build --target ${{ steps.target.outputs.target }}
-<<<<<<< HEAD
-        working-directory: mon_projet
-=======
->>>>>>> uat
         env:
           DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
