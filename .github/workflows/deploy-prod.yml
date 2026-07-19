@@ -3,7 +3,6 @@ name: Deploy to PROD
 on:
   push:
     branches: [main]
-
 jobs:
   dbt-deploy-prod:
     runs-on: ubuntu-latest
@@ -18,7 +17,7 @@ jobs:
       - name: Create profiles.yml
         run: |
           mkdir -p ~/.dbt
-          echo "mon_projet :" > ~/.dbt/profiles.yml
+          echo "mon_projet:" > ~/.dbt/profiles.yml
           echo "  target: prod" >> ~/.dbt/profiles.yml
           echo "  outputs:" >> ~/.dbt/profiles.yml
           echo "    prod:" >> ~/.dbt/profiles.yml
