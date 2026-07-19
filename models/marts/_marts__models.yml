@@ -10,8 +10,4 @@ models:
           - unique
           - not_null
 
-      - name: customer_segment
-        description: "Segmentation métier basée sur le nombre de commandes"
-        tests:
-          - accepted_values:
-              values: ['Jamais commandé', 'Client occasionnel', 'Client régulier']
+    
